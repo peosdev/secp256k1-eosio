@@ -1,7 +1,13 @@
-libsecp256k1
-============
+libsecp256k1 for EOSIO smart contracts
+======================================
 
 [![Build Status](https://travis-ci.org/bitcoin-core/secp256k1.svg?branch=master)](https://travis-ci.org/bitcoin-core/secp256k1)
+
+*****
+Bitcoin's secp256k1 cryptography library, with additional support for ring signatures, bulletproofs, and support for running inside EOSIO smart contracts. This library is developed for use inside the contracts of the pEOS platform running on EOSIO and makes specific optimizations and assumptions. **WARNING: This fork no longer works properly outside the EOSIO platform**. Therefore use at your own risk!
+
+Compilation requires a special version of eosio.cdt that you can find here: https://github.com/peosdev/eosio.cdt
+*****
 
 Optimized C library for EC operations on curve secp256k1.
 
