@@ -1026,14 +1026,14 @@ static void secp256k1_scalar_chacha20(secp256k1_scalar *r1, secp256k1_scalar *r2
         x14 += 0;
         x15 += over_count;
 
-        r1->d[3] = LE32((uint64_t) x0) << 32 | LE32(x1);
-        r1->d[2] = LE32((uint64_t) x2) << 32 | LE32(x3);
-        r1->d[1] = LE32((uint64_t) x4) << 32 | LE32(x5);
-        r1->d[0] = LE32((uint64_t) x6) << 32 | LE32(x7);
-        r2->d[3] = LE32((uint64_t) x8) << 32 | LE32(x9);
-        r2->d[2] = LE32((uint64_t) x10) << 32 | LE32(x11);
-        r2->d[1] = LE32((uint64_t) x12) << 32 | LE32(x13);
-        r2->d[0] = LE32((uint64_t) x14) << 32 | LE32(x15);
+        r1->d[3] = BE32((uint64_t) x0) << 32 | BE32(x1);
+        r1->d[2] = BE32((uint64_t) x2) << 32 | BE32(x3);
+        r1->d[1] = BE32((uint64_t) x4) << 32 | BE32(x5);
+        r1->d[0] = BE32((uint64_t) x6) << 32 | BE32(x7);
+        r2->d[3] = BE32((uint64_t) x8) << 32 | BE32(x9);
+        r2->d[2] = BE32((uint64_t) x10) << 32 | BE32(x11);
+        r2->d[1] = BE32((uint64_t) x12) << 32 | BE32(x13);
+        r2->d[0] = BE32((uint64_t) x14) << 32 | BE32(x15);
 
         over1 = secp256k1_scalar_check_overflow(r1);
         over2 = secp256k1_scalar_check_overflow(r2);
