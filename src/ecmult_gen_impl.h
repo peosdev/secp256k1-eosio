@@ -12,11 +12,25 @@
 #include "ecmult_gen.h"
 #include "hash_impl.h"
 #ifdef USE_ECMULT_STATIC_PRECOMPUTATION
+#ifdef USE_ECMULT_STATIC_EOS_LOADER
+static secp256k1_ge_storage *secp256k1_ecmult_static_context = NULL;
+#else
 #include "ecmult_static_context.h"
 #endif
-static void secp256k1_ecmult_gen_context_init(secp256k1_ecmult_gen_context *ctx) {
+#endif
+
+static void secp256k1_ecmult_gen_context_init(secp256k1_ecmult_gen_context *ctx)
+{
     ctx->prec = NULL;
 }
+
+#ifdef USE_ECMULT_STATIC_EOS_LOADER
+static void secp256k1_ecmult_gen_context_init_with_prec(secp256k1_ecmult_gen_context *ctx, secp256k1_ge_storage *prec)
+{
+    ctx->prec = NULL;
+    secp256k1_ecmult_static_context = prec;
+}
+#endif
 
 static void secp256k1_ecmult_gen_context_build(secp256k1_ecmult_gen_context *ctx, const secp256k1_callback* cb) {
 #ifndef USE_ECMULT_STATIC_PRECOMPUTATION
@@ -77,7 +91,7 @@ static void secp256k1_ecmult_gen_context_build(secp256k1_ecmult_gen_context *ctx
                 secp256k1_gej_add_var(&numsbase, &numsbase, &nums_gej, NULL);
             }
         }
-        secp256k1_ge_set_all_gej_var(prec, precj, 1024);
+        secp256k1_ge_set_all_gej_var(prec, precj, 1024, cb);
     }
     for (j = 0; j < 64; j++) {
         for (i = 0; i < 16; i++) {

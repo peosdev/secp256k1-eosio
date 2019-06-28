@@ -29,6 +29,7 @@ typedef struct {
 } secp256k1_ecmult_gen_context;
 
 static void secp256k1_ecmult_gen_context_init(secp256k1_ecmult_gen_context* ctx);
+static void secp256k1_ecmult_gen_context_init_with_prec(secp256k1_ecmult_gen_context *ctx, secp256k1_ge_storage *prec);
 static void secp256k1_ecmult_gen_context_build(secp256k1_ecmult_gen_context* ctx, const secp256k1_callback* cb);
 static void secp256k1_ecmult_gen_context_clone(secp256k1_ecmult_gen_context *dst,
                                                const secp256k1_ecmult_gen_context* src, const secp256k1_callback* cb);
